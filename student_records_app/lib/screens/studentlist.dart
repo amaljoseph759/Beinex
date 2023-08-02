@@ -15,7 +15,7 @@ class StudentTableView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Student Records'),
+        title: const Text('Student Records'),
         actions: [
           Obx(
             () => IconButton(
