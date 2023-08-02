@@ -4,9 +4,7 @@ import 'package:student_records_app/Model/student_model.dart';
 import 'package:student_records_app/controllers/add_edit_controller.dart';
 
 class AddEditScreen extends StatefulWidget {
-  final isEdit;
-
-  AddEditScreen({super.key, required this.isEdit});
+  AddEditScreen({super.key});
 
   @override
   State<AddEditScreen> createState() => _AddEditScreenState();
@@ -17,11 +15,12 @@ class _AddEditScreenState extends State<AddEditScreen> {
   TextEditingController ageController = TextEditingController();
   TextEditingController gradeController = TextEditingController();
   String studentid = "";
+  bool isedit = Get.arguments ?? false;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    if (widget.isEdit) {
+    if (isedit) {
       nameController = addEditController.nameController;
       ageController = addEditController.ageController;
       gradeController = addEditController.gradeController;
@@ -99,14 +98,14 @@ class _AddEditScreenState extends State<AddEditScreen> {
                           id: studentid.isEmpty
                               ? DateTime.now().millisecondsSinceEpoch
                               : int.parse(studentid));
-                      if (widget.isEdit) {
+                      if (isedit) {
                         addEditController.updateStudent(studentdata);
                       } else {
                         addEditController.addStudent(studentdata);
                       }
                     }
                   },
-                  child: Text(widget.isEdit ? "Update student" : 'Add Student'),
+                  child: Text(isedit ? "Update student" : 'Add Student'),
                 ),
               ],
             ),

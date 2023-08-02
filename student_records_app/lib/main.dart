@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:student_records_app/screens/addscreen.dart';
 import 'package:student_records_app/screens/studentlist.dart';
 
 import 'controllers/theme_controller.dart';
@@ -30,8 +31,12 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData.dark(),
       themeMode:
           themeController.isDarkMode.value ? ThemeMode.dark : ThemeMode.light,
-      home: StudentTableView(),
-      // initialRoute: '/',
+      // home: StudentTableView(),
+      initialRoute: '/',
+      getPages: [
+        GetPage(name: '/', page: () => StudentTableView()),
+        GetPage(name: '/add', page: () => AddEditScreen()),
+      ],
     );
   }
 }

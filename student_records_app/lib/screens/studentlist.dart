@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:student_records_app/screens/addscreen.dart';
-
 import '../controllers/add_edit_controller.dart';
 import '../controllers/studentlist_controller.dart';
 import '../controllers/theme_controller.dart';
@@ -80,7 +78,7 @@ class StudentTableView extends StatelessWidget {
                             addEditController.gradeController.text =
                                 student.grade;
                             addEditController.id = student.id.toString();
-                            Get.to(() => AddEditScreen(isEdit: true));
+                            Get.toNamed('/add', arguments: true);
                           },
                         )),
                         DataCell(IconButton(
@@ -113,7 +111,7 @@ class StudentTableView extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.to(() => AddEditScreen(isEdit: false));
+          Get.toNamed('/add', arguments: false);
         },
         child: const Icon(Icons.add),
       ),
