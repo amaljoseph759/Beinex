@@ -45,58 +45,66 @@ class StudentTableView extends StatelessWidget {
             } else {
               return SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                child: DataTable(
-                  columns: const [
-                    DataColumn(label: Text('Name')),
-                    DataColumn(label: Text('Age')),
-                    DataColumn(label: Text('Grade')),
-                    DataColumn(label: Text('')),
-                    DataColumn(label: Text('')),
-                  ],
-                  rows: studentListController.students.map((student) {
-                    return DataRow(cells: [
-                      DataCell(Container(
-                          width: MediaQuery.of(context).size.width / 5,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: DataTable(
+                    horizontalMargin: 0, // Set horizontal margin to 0
+                    columnSpacing: MediaQuery.of(context).size.width /
+                        10, // Set column spacing to 0
+                    columns: const [
+                      DataColumn(label: Text('Name')),
+                      DataColumn(label: Text('Age')),
+                      DataColumn(label: Text('Grade')),
+                      DataColumn(label: Text('')),
+                      DataColumn(label: Text('')),
+                    ],
+                    rows: studentListController.students.map((student) {
+                      return DataRow(cells: [
+                        DataCell(Container(
+                          width: MediaQuery.of(context).size.width / 7,
                           child: Text(
                             student.name,
                             overflow: TextOverflow.ellipsis,
-                          ))),
-                      DataCell(Text(student.age.toString())),
-                      DataCell(Text(student.grade)),
-                      DataCell(IconButton(
-                        icon: const Icon(Icons.mode_edit_outlined,
-                            color: Colors.blue),
-                        onPressed: () {
-                          addEditController.nameController.text = student.name;
-                          addEditController.ageController.text =
-                              student.age.toString();
-                          addEditController.gradeController.text =
-                              student.grade;
-                          addEditController.id = student.id.toString();
-                          Get.to(() => AddEditScreen(isEdit: true));
-                        },
-                      )),
-                      DataCell(IconButton(
-                          icon: const Icon(
-                            Icons.delete_outline_outlined,
-                            color: Colors.red,
                           ),
+                        )),
+                        DataCell(Text(student.age.toString())),
+                        DataCell(Text(student.grade)),
+                        DataCell(IconButton(
+                          icon: const Icon(Icons.mode_edit_outlined,
+                              color: Colors.blue),
                           onPressed: () {
-                            Get.defaultDialog(
-                                title: 'Confirm Deletion',
-                                middleText:
-                                    'Are you sure you want to delete this student?',
-                                confirm: ElevatedButton(
-                                  onPressed: () {
-                                    studentListController
-                                        .deleteStudent(student);
-                                    Get.back();
-                                  },
-                                  child: const Text('Delete'),
-                                ));
-                          }))
-                    ]);
-                  }).toList(),
+                            addEditController.nameController.text =
+                                student.name;
+                            addEditController.ageController.text =
+                                student.age.toString();
+                            addEditController.gradeController.text =
+                                student.grade;
+                            addEditController.id = student.id.toString();
+                            Get.to(() => AddEditScreen(isEdit: true));
+                          },
+                        )),
+                        DataCell(IconButton(
+                            icon: const Icon(
+                              Icons.delete_outline_outlined,
+                              color: Colors.red,
+                            ),
+                            onPressed: () {
+                              Get.defaultDialog(
+                                  title: 'Confirm Deletion',
+                                  middleText:
+                                      'Are you sure you want to delete this student?',
+                                  confirm: ElevatedButton(
+                                    onPressed: () {
+                                      studentListController
+                                          .deleteStudent(student);
+                                      Get.back();
+                                    },
+                                    child: const Text('Delete'),
+                                  ));
+                            }))
+                      ]);
+                    }).toList(),
+                  ),
                 ),
               );
             }
@@ -109,6 +117,7 @@ class StudentTableView extends StatelessWidget {
         },
         child: const Icon(Icons.add),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

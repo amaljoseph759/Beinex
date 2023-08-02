@@ -41,7 +41,10 @@ class _AddEditScreenState extends State<AddEditScreen> {
         title: const Text('Add Student'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: MediaQuery.of(context).size.width / 5,
+        ),
         child: SingleChildScrollView(
           child: Form(
             key: formKey,
@@ -103,7 +106,7 @@ class _AddEditScreenState extends State<AddEditScreen> {
                       }
                     }
                   },
-                  child: const Text('Add Student'),
+                  child: Text(widget.isEdit ? "Update student" : 'Add Student'),
                 ),
               ],
             ),
